@@ -14,5 +14,9 @@ func RegisterRouter() *gin.Engine {
 	targetDonation.GET("", Controllers.GetAllTargetDonation)
 	targetDonation.PUT("/:uuid", Controllers.UpdateTargetDonation)
 	targetDonation.DELETE("/:uuid", Controllers.DeleteTargetDonation)
+
+	targetDonation.POST("/image", Controllers.UploadTargetDonationPicture)
+	targetDonation.GET("/image/:image_url", Controllers.GetTargetDonationPicture)
+	targetDonation.DELETE("/image/:image_url", Controllers.DeleteTargetDonationPicture)
 	return r
 }
