@@ -12,7 +12,7 @@ import (
 
 func DeleteTargetDonationPicture(c *gin.Context) {
 	fileName := c.Param("image_url")
-	fileBase := filepath.Join("statics", "images", fileName)
+	fileBase := filepath.Join("storage", "images", fileName)
 	err := os.Remove(fileBase)
 
 	if err != nil {

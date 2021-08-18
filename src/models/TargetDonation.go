@@ -10,6 +10,7 @@ type TargetDonation struct {
 	Name               string     `json:"name"`
 	Description        string     `json:"description" gorm:"type:text"`
 	TargetAmount       float64    `json:"target_amount"`
+	UUID               string     `json:"uuid"`
 	ExpiredDate        time.Time  `json:"expired_date"`
 	ImageUrl           string     `json:"image_url"`
 	CurrentAmount      int        `json:"current_amount"`
@@ -23,4 +24,8 @@ type TargetDonationInput struct {
 	ExpiredDate        string  `json:"expired_date"`
 	ImageUrl           string  `json:"image_url"`
 	CategoryDonationID int     `json:"category_donation_id"`
+}
+
+type UrlResponse struct {
+	ImageUrl string `json:"image_url"`
 }

@@ -3,6 +3,8 @@ package Controllers
 import (
 	"fmt"
 	"mahaqu/src/helper"
+	"mahaqu/src/models"
+	"mahaqu/src/utility"
 	"net/http"
 	"path/filepath"
 
@@ -15,11 +17,14 @@ func UploadTargetDonationPicture(c *gin.Context) {
 		c.String(http.StatusBadRequest, fmt.Sprintf("get form err: %s", err.Error()))
 		return
 	}
-	fileBase := filepath.Join("statics", "images", file.Filename)
+	fileBase := filepath.Join("storage", "images", file.Filename)
 	if err := c.SaveUploadedFile(file, fileBase); err != nil {
 		c.String(http.StatusBadRequest, fmt.Sprintf("upload file err: %s", err.Error()))
 		return
 	}
-
-	helper.Response(c, "MHQ0001", "created data", `success`, nil)
+	url := fmt.Sprintf("%s/target_donation/image/%s", utility.GoDotEnvVariable("BASE_URL"), file.Filename)
+	data := models.UrlResponse{
+		ImageUrl: url,
+	}
+	helper.Response(c, "MHQ0001", "created data", data, nil)
 }
