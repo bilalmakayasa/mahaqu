@@ -13,6 +13,7 @@ import (
 
 func UploadTargetDonationPicture(c *gin.Context) {
 	file, err := c.FormFile("File")
+	fmt.Println("masuk siniiiii")
 	if err != nil {
 		c.String(http.StatusBadRequest, fmt.Sprintf("get form err: %s", err.Error()))
 		return

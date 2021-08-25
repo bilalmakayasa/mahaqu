@@ -12,6 +12,7 @@ func RegisterRouter() *gin.Engine {
 	targetDonation := r.Group("/target_donation")
 	targetDonation.POST("", Controllers.CreateTargetDonation)
 	targetDonation.GET("", Controllers.GetAllTargetDonation)
+	targetDonation.GET("/:uuid", Controllers.GetTargetDonationUUID)
 	targetDonation.PUT("/:uuid", Controllers.UpdateTargetDonation)
 	targetDonation.DELETE("/:uuid", Controllers.DeleteTargetDonation)
 

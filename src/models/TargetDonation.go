@@ -29,3 +29,30 @@ type TargetDonationInput struct {
 type UrlResponse struct {
 	ImageUrl string `json:"image_url"`
 }
+
+type TargetDonationAllResponse struct {
+	ID                 int       `json:"id"`
+	CategoryDonationID int       `json:"category_donation_id"`
+	Name               string    `json:"name"`
+	TargetAmount       float64   `json:"target_amount"`
+	UUID               string    `json:"uuid"`
+	ExpiredDate        time.Time `json:"expired_date"`
+	CurrentAmount      int       `json:"current_amount"`
+	ExpiredDaysLeft    int       `json:"expired_days_left"`
+	IsActive           bool      `json:"is_active"`
+	DonationPercentage float64   `json:"donation_percentage"`
+}
+
+type TargetDonationResponse struct {
+	ID                 int       `json:"id"`
+	CategoryDonationID int       `json:"category_donation_id"`
+	Name               string    `json:"name"`
+	TargetAmount       float64   `json:"target_amount"`
+	Description        string    `json:"description" gorm:"type:text"`
+	UUID               string    `json:"uuid"`
+	ExpiredDate        time.Time `json:"expired_date"`
+	CurrentAmount      int       `json:"current_amount"`
+	ExpiredDaysLeft    int       `json:"expired_days_left"`
+	IsActive           bool      `json:"is_active"`
+	DonationPercentage float64   `json:"donation_percentage"`
+}
