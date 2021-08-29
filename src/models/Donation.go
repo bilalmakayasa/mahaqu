@@ -8,5 +8,15 @@ type Donation struct {
 	Name             string  `json:"name"`
 	Amount           float64 `json:"amount"`
 	Email            string  `json:"email"`
-	IsVisible        string  `json:"is_visible"`
+	IsVisible        bool    `json:"is_visible"`
+	UUID             string  `json:"uuid"`
+}
+
+type DonationInput struct {
+	PaymentTypeID      int     `json:"payment_type_id"`
+	Name               string  `json:"name"`
+	Amount             float64 `json:"amount"`
+	Email              string  `json:"email"`
+	IsVisible          bool    `json:"is_visible"`
+	TargetDonationUUID string  `json:"target_donation_uuid"`
 }

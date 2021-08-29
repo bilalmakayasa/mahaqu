@@ -12,10 +12,15 @@ import (
 )
 
 func GetAllTargetDonation(c *gin.Context) {
+	var param models.Params
+	if err := c.Bind(&param); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
 	var targetDonation []models.TargetDonation
 
 	baseQuerry := config.DB
-	if err := baseQuerry.Find(&targetDonation).Error; err != nil {
+	if err := baseQuerry.Limit(param.Limit).Offset(param.Offset).Find(&targetDonation).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Record not found!"})
 		return
 	}

@@ -30,5 +30,10 @@ func UpdateTargetDonation(c *gin.Context) {
 	targetDonation.Description = targetDonationInput.Description
 	targetDonation.CategoryDonationID = targetDonationInput.CategoryDonationID
 	targetDonation.ImageUrl = targetDonationInput.ImageUrl
+	if err := config.DB.Save(&targetDonation).Error; err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Record not found!"})
+		return
+	}
+
 	helper.Response(c, "MHQ0001", "updated data", targetDonation, nil)
 }
