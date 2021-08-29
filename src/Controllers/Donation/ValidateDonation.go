@@ -18,6 +18,10 @@ func ValidateDonation(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Record not found!"})
 		return
 	}
+
+	if donation.StatusID == 3 {
+		helper.Response(c, "MHQ0001", "the payment has been validate", nil, nil)
+	}
 	donation.StatusID = 3
 	if err := config.DB.Save(&donation).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Record not found!"})

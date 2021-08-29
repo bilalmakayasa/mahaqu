@@ -18,6 +18,16 @@ func ConfirmDonation(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Record not found!"})
 		return
 	}
+	var prohibited bool
+	switch donation.StatusID {
+	case 2, 3:
+		prohibited = true
+	}
+
+	if prohibited {
+		helper.Response(c, "MHQ0001", "the payment has been confirmed", nil, nil)
+		return
+	}
 	donation.StatusID = 2
 	if err := config.DB.Save(&donation).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Record not found!"})
