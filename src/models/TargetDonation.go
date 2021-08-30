@@ -43,6 +43,10 @@ type TargetDonationAllResponse struct {
 	DonationPercentage float64   `json:"donation_percentage"`
 }
 
+type GetAllResponse struct {
+	Count int64       `json:"total"`
+	Data  interface{} `json:"data"`
+}
 type TargetDonationResponse struct {
 	ID                 int       `json:"id"`
 	CategoryDonationID int       `json:"category_donation_id"`

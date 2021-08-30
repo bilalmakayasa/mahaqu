@@ -20,13 +20,19 @@ func GetAllTargetDonation(c *gin.Context) {
 	var targetDonation []models.TargetDonation
 
 	baseQuerry := config.DB
-	if err := baseQuerry.Limit(param.Limit).Offset(param.Offset).Find(&targetDonation).Error; err != nil {
+	queryResult := baseQuerry.Limit(param.Limit).Offset(param.Offset).Find(&targetDonation)
+
+	if queryResult.Error != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Record not found!"})
 		return
 	}
+	var count int64
 
+	if err := config.DB.Model(&targetDonation).Count(&count).Error; err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Record not found!"})
+		return
+	}
 	var result []models.TargetDonationAllResponse
-
 	today := time.Now()
 	var isActive bool
 	for _, item := range targetDonation {
@@ -54,5 +60,10 @@ func GetAllTargetDonation(c *gin.Context) {
 	sort.SliceStable(result, func(i, j int) bool {
 		return result[i].ExpiredDaysLeft < result[j].ExpiredDaysLeft
 	})
-	helper.Response(c, "MHQ0002", "fetch data success", result, nil)
+
+	resultData := models.GetAllResponse{
+		Count: count,
+		Data:  result,
+	}
+	helper.Response(c, "MHQ0002", "fetch data success", resultData, nil)
 }
