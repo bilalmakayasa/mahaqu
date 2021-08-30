@@ -40,6 +40,7 @@ type TargetDonationAllResponse struct {
 	CurrentAmount      int       `json:"current_amount"`
 	ExpiredDaysLeft    int       `json:"expired_days_left"`
 	IsActive           bool      `json:"is_active"`
+	ImageUrl           string    `json:"image_url"`
 	DonationPercentage float64   `json:"donation_percentage"`
 }
 
@@ -57,6 +58,7 @@ type TargetDonationResponse struct {
 	ExpiredDate        time.Time `json:"expired_date"`
 	CurrentAmount      int       `json:"current_amount"`
 	ExpiredDaysLeft    int       `json:"expired_days_left"`
+	ImageUrl           string    `json:"image_url"`
 	IsActive           bool      `json:"is_active"`
 	DonationPercentage float64   `json:"donation_percentage"`
 }

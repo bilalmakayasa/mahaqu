@@ -35,6 +35,7 @@ func GetTargetDonationUUID(c *gin.Context) {
 		CategoryDonationID: targetDonation.CategoryDonationID,
 		ExpiredDate:        targetDonation.ExpiredDate,
 		ExpiredDaysLeft:    estDayLeft,
+		ImageUrl:           targetDonation.ImageUrl,
 		IsActive:           isActive,
 		TargetAmount:       targetDonation.TargetAmount,
 		CurrentAmount:      targetDonation.CurrentAmount,
