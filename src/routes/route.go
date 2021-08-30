@@ -4,13 +4,14 @@ import (
 	Donation "mahaqu/src/Controllers/Donation"
 	PaymentType "mahaqu/src/Controllers/PaymentType"
 	TargetDonation "mahaqu/src/Controllers/TargetDonation"
+	"mahaqu/src/middleware"
 
 	"github.com/gin-gonic/gin"
 )
 
 func RegisterRouter() *gin.Engine {
 	r := gin.Default()
-
+	r.Use(middleware.CORSMiddleware())
 	targetDonation := r.Group("/target_donation")
 	targetDonation.POST("", TargetDonation.CreateTargetDonation)
 	targetDonation.GET("", TargetDonation.GetAllTargetDonation)
