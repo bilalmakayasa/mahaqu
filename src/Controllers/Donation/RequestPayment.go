@@ -55,6 +55,7 @@ func RequestDonation(c *gin.Context) {
 		PaymentTypeID:    donationInput.PaymentTypeID,
 		StatusID:         1,
 		Name:             donationInput.Name,
+		Message:          donationInput.Message,
 		Amount:           donationInput.Amount + donationCountData,
 		Email:            donationInput.Email,
 		IsVisible:        donationInput.IsVisible,

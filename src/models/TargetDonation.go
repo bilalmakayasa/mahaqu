@@ -14,6 +14,7 @@ type TargetDonation struct {
 	ExpiredDate        time.Time  `json:"expired_date"`
 	ImageUrl           string     `json:"image_url"`
 	CurrentAmount      int        `json:"current_amount"`
+	DonationCount      int        `json:"donation_count"`
 	Donation           []Donation `gorm:"Foreignkey:target_donation_id;association_foreignkey:ID;" json:"donation"`
 }
 
@@ -36,10 +37,12 @@ type TargetDonationAllResponse struct {
 	Name               string    `json:"name"`
 	TargetAmount       float64   `json:"target_amount"`
 	UUID               string    `json:"uuid"`
+	Description        string    `json:"description" gorm:"type:text"`
 	ExpiredDate        time.Time `json:"expired_date"`
 	CurrentAmount      int       `json:"current_amount"`
 	ExpiredDaysLeft    int       `json:"expired_days_left"`
 	IsActive           bool      `json:"is_active"`
+	DonationCount      int       `json:"donation_count"`
 	ImageUrl           string    `json:"image_url"`
 	DonationPercentage float64   `json:"donation_percentage"`
 }
@@ -58,6 +61,7 @@ type TargetDonationResponse struct {
 	ExpiredDate        time.Time `json:"expired_date"`
 	CurrentAmount      int       `json:"current_amount"`
 	ExpiredDaysLeft    int       `json:"expired_days_left"`
+	DonationCount      int       `json:"donation_count"`
 	ImageUrl           string    `json:"image_url"`
 	IsActive           bool      `json:"is_active"`
 	DonationPercentage float64   `json:"donation_percentage"`

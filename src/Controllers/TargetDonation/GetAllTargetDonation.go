@@ -50,6 +50,7 @@ func GetAllTargetDonation(c *gin.Context) {
 			ExpiredDate:        item.ExpiredDate,
 			ExpiredDaysLeft:    estDayLeft,
 			IsActive:           isActive,
+			Description:        item.Description,
 			TargetAmount:       item.TargetAmount,
 			CurrentAmount:      item.CurrentAmount,
 			ImageUrl:           item.ImageUrl,
