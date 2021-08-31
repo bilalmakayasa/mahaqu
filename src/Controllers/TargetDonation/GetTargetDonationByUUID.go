@@ -38,6 +38,7 @@ func GetTargetDonationUUID(c *gin.Context) {
 		ImageUrl:           targetDonation.ImageUrl,
 		IsActive:           isActive,
 		TargetAmount:       targetDonation.TargetAmount,
+		DonationCount:      targetDonation.DonationCount,
 		CurrentAmount:      targetDonation.CurrentAmount,
 		DonationPercentage: (float64(targetDonation.CurrentAmount) / float64(targetDonation.TargetAmount)) * 100,
 	}

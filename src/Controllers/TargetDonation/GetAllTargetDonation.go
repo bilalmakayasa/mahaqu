@@ -52,6 +52,7 @@ func GetAllTargetDonation(c *gin.Context) {
 			IsActive:           isActive,
 			Description:        item.Description,
 			TargetAmount:       item.TargetAmount,
+			DonationCount:      item.DonationCount,
 			CurrentAmount:      item.CurrentAmount,
 			ImageUrl:           item.ImageUrl,
 			DonationPercentage: (float64(item.CurrentAmount) / float64(item.TargetAmount)) * 100,
