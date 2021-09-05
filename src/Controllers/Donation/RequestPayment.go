@@ -5,11 +5,11 @@ import (
 	"mahaqu/src/config"
 	"mahaqu/src/helper"
 	"mahaqu/src/models"
-	"mahaqu/src/utility"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
 	"github.com/go-redis/redis"
+	"github.com/google/uuid"
 )
 
 type DonationCount struct {
@@ -59,7 +59,7 @@ func RequestDonation(c *gin.Context) {
 		Amount:           donationInput.Amount + donationCountData,
 		Email:            donationInput.Email,
 		IsVisible:        donationInput.IsVisible,
-		UUID:             utility.RandString(40),
+		UUID:             uuid.NewString(),
 	}
 
 	if err := config.DB.Create(&data).Error; err != nil {

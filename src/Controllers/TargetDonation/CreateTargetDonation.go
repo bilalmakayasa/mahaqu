@@ -4,12 +4,12 @@ import (
 	"mahaqu/src/config"
 	"mahaqu/src/helper"
 	"mahaqu/src/models"
-	"mahaqu/src/utility"
 	"net/http"
 	"strings"
 	"time"
 
 	"github.com/gin-gonic/gin"
+	"github.com/google/uuid"
 )
 
 func CreateTargetDonation(c *gin.Context) {
@@ -23,7 +23,7 @@ func CreateTargetDonation(c *gin.Context) {
 	inputDate, _ := time.Parse("2006-01-02", dateArray[2]+"-"+dateArray[1]+"-"+dateArray[0])
 	data := models.TargetDonation{
 		Name:               targetDonationInput.Name,
-		UUID:               utility.RandString(40),
+		UUID:               uuid.New().String(),
 		Description:        targetDonationInput.Description,
 		TargetAmount:       targetDonationInput.TargetAmount,
 		ExpiredDate:        inputDate,
