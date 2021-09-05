@@ -13,18 +13,32 @@ import (
 
 func GetAllDonation(c *gin.Context) {
 	var param models.Params
-	var donation []models.Donation
+	var donation, countDonation []models.Donation
 	if err := c.Bind(&param); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
-	baseQuerry := config.DB
-	if err := baseQuerry.Limit(param.Limit).Offset(param.Offset).Find(&donation).Error; err != nil {
+	baseQuerry := config.DB.Order("created_at desc")
+	countQuerry := config.DB
+
+	if param.TargetDonationID != 0 {
+		baseQuerry = baseQuerry.Where("target_donation_id = ?", param.TargetDonationID)
+		countQuerry = baseQuerry.Where("target_donation_id = ?", param.TargetDonationID)
+	}
+	if param.StatusID != 0 {
+		baseQuerry = baseQuerry.Where("status_id = ?", param.StatusID)
+		countQuerry = baseQuerry.Where("status_id = ?", param.StatusID)
+	}
+	if err := baseQuerry.Debug().Limit(param.Limit).Offset(param.Offset).Find(&donation).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Record not found!"})
 		return
 	}
-
+	var count int64
+	if err := countQuerry.Find(&countDonation).Count(&count).Error; err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Record not found!"})
+		return
+	}
 	var result []models.DonationResponse
 	now := time.Now()
 	for _, item := range donation {
@@ -56,5 +70,10 @@ func GetAllDonation(c *gin.Context) {
 
 		result = append(result, data)
 	}
-	helper.Response(c, "MHQ0002", "fetch data success", result, nil)
+
+	resultData := models.GetAllResponse{
+		Count: count,
+		Data:  result,
+	}
+	helper.Response(c, "MHQ0002", "fetch data success", resultData, nil)
 }
